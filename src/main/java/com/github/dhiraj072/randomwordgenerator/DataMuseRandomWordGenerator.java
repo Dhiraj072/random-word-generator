@@ -3,6 +3,7 @@ package com.github.dhiraj072.randomwordgenerator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -19,12 +20,11 @@ import org.slf4j.LoggerFactory;
 public class DataMuseRandomWordGenerator implements RandomWordGenerator {
 
   private static final Logger LOGGER = LoggerFactory
-      .getLogger(
-          DataMuseRandomWordGenerator.class);
+      .getLogger(DataMuseRandomWordGenerator.class);
 
   private static final String BASE_URL = "https://api.datamuse.com/words";
   private static final String MAX_RESULTS = "100";
-  private DataMuseWord randomWord;
+  private List<DataMuseWord> randomWords;
   private AsyncHttpClient httpClient;
   private ObjectMapper objectMapper;
 
@@ -34,7 +34,7 @@ public class DataMuseRandomWordGenerator implements RandomWordGenerator {
 
       httpClient = Dsl.asyncHttpClient();
       objectMapper = new ObjectMapper();
-      Future<Response> responseFuture = initializeNewRandomWord();
+      Future<Response> responseFuture = initializeNewRandomWords();
       responseFuture.get();
     } catch (ExecutionException | InterruptedException e) {
 
@@ -44,7 +44,7 @@ public class DataMuseRandomWordGenerator implements RandomWordGenerator {
 
   }
 
-  private ListenableFuture<Response> initializeNewRandomWord() {
+  private ListenableFuture<Response> initializeNewRandomWords() {
 
     LOGGER.debug("Initializing with new random word");
     BoundRequestBuilder randomWordRequest = httpClient.prepareGet(BASE_URL)
@@ -56,14 +56,14 @@ public class DataMuseRandomWordGenerator implements RandomWordGenerator {
       public Response onCompleted(Response response) throws IOException {
 
         LOGGER.debug("Got list of words {}", response.getResponseBody());
-        List<DataMuseWord> words = objectMapper.readValue(response.getResponseBody(), new TypeReference<List<DataMuseWord>>() {});
+        List<DataMuseWord> words = objectMapper.readValue(response.getResponseBody(),
+            new TypeReference<List<DataMuseWord>>() {});
         if (words.isEmpty()) {
 
           LOGGER.warn("Response body is empty. Not setting random word!");
           return response;
         }
-        Random random = new Random();
-        setRandomWord(words.get(random.nextInt(words.size())));
+        setRandomWords(words);
         return response;
       }
     });
@@ -72,12 +72,18 @@ public class DataMuseRandomWordGenerator implements RandomWordGenerator {
   @Override
   public String getRandomWord() {
 
-    initializeNewRandomWord();
-    return randomWord.getWord();
+    initializeNewRandomWords();
+    Random random = new Random();
+    return randomWords.get(random.nextInt(randomWords.size())).getWord();
   }
 
   public void setRandomWord(DataMuseWord randomWord) {
 
-    this.randomWord = randomWord;
+    this.randomWords = Arrays.asList(randomWord);
+  }
+
+  public void setRandomWords(List<DataMuseWord> randomWords) {
+
+    this.randomWords = randomWords;
   }
 }

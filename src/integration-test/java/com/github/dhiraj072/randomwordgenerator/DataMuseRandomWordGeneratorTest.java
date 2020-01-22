@@ -1,5 +1,6 @@
 package com.github.dhiraj072.randomwordgenerator;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +19,8 @@ class DataMuseRandomWordGeneratorTest {
   @Test
   void testGetsRandomWordCorrectly() {
 
-    assertNotNull(generator.getRandomWord());
+    String word = generator.getRandomWord();
+    assertNotNull(word);
+    assertNotEquals(word, generator.getRandomWord());
   }
 }
