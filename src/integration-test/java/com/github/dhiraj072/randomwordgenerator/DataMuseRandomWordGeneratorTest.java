@@ -1,6 +1,6 @@
-package com.github.dhiraj072.randomwordgenerator.utils;
+package com.github.dhiraj072.randomwordgenerator;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
