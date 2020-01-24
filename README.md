@@ -1,11 +1,20 @@
 # Random word generator
 
-A java utility to generate random words
+A java library to generate random words.
+
+## Usage
+```java
+// Import the class
+import com.github.dhiraj072.randomwordgenerator.RandomWordGenerator;
+
+// Get a random word with a simple static method call
+String randomWord = RandomWordGenerator.getRandomWord();
+```
 
 ## Built With
 
 -   [Gradle](https://gradle.org/) - Build tool
--   [DataMuse API](https://www.datamuse.com/api/) - For generation of random video search queries
+-   [DataMuse API](https://www.datamuse.com/api/) - For getting list of words
 -   [JUnit](https://junit.org/) - Testing Framework
 
 ## Authors
