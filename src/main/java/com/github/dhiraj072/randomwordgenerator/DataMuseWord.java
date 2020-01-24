@@ -3,6 +3,15 @@ package com.github.dhiraj072.randomwordgenerator;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Class representation of a word returned by the <a href="https://www.datamuse.com/api/">DataMuse API</a>
+ * A DataMuse word JSON looks like follows:
+ * {
+ *  "word":"terpsichore",
+ *  "score":91967,
+ *  "tags":["syn","n","prop"]
+ * }
+ */
 public class DataMuseWord {
 
   private String word;
