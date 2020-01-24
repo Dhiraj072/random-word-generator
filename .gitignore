@@ -4,6 +4,7 @@
 
 ### Secrets ###
 src/main/resources/client_secret*.json
+gradle.properties
 
 ### IntelliJ IDEA ###
 .idea

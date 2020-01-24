@@ -15,8 +15,11 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'jacoco'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+apply plugin: 'java-library'
 
-group = 'com.github.dhiraj072.randomwordgenerator'
+group = 'com.github.dhiraj072'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 ext.artifactId = 'random-word-generator'
@@ -110,4 +113,42 @@ dependencies {
 	testCompile 'com.github.stefanbirkner:system-rules:1.17.2'
 	testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
 }
+
+publishing {
+	publications {
+		randomWordGenerator(MavenPublication) {
+			groupId = "${group}"
+			artifactId = "${artifactId}"
+			version = "${version}"
+			from components.java
+			pom {
+				name = 'Random Word Generator'
+				url = 'https://github.com/Dhiraj072/random-word-generator'
+				licenses {
+					license {
+						name = 'MIT License'
+						url = 'https://opensource.org/licenses/MIT'
+					}
+				}
+				developers {
+					developer {
+						id = 'dhiraj072'
+						name = 'Dhiraj Bhatt'
+						email = 'dhirajbhatt072@gmail.com'
+					}
+				}
+				scm {
+					connection = 'https://github.com/Dhiraj072/random-word-generator.git'
+					developerConnection = 'https://github.com/Dhiraj072/random-word-generator.git'
+					url = 'https://github.com/Dhiraj072/random-word-generator'
+				}
+			}
+		}
+	}
+}
+
+signing {
+	sign publishing.publications.randomWordGenerator
+}
+
 
