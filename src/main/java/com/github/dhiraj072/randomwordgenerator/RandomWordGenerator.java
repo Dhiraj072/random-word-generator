@@ -13,12 +13,17 @@ import org.asynchttpclient.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Utility class that can return random words using
+ * <a href="https://www.datamuse.com/api/">DataMuse API</a> or
+ * locally from {@link Topics}
+ */
 public class RandomWordGenerator {
 
   private static final Logger LOGGER = LoggerFactory
       .getLogger(RandomWordGenerator.class);
 
-  private static final String BASE_URL = "https://api.datamuse.com/words";
+  private static final String DATAMUSE_API_URL = "https://api.datamuse.com/words";
   private static final String MAX_RESULTS = "1000";
   private static List<DataMuseWord> randomWords;
   private static final ObjectMapper MAPPER = new ObjectMapper();;
@@ -52,6 +57,12 @@ public class RandomWordGenerator {
     }
   }
 
+  /**
+   * Get a random word. This has the side-effect of calling the
+   * {@link #initializeNewRandomWords()} to get the next set of
+   * random words
+   * @return a random word
+   */
   public static String getRandomWord() {
 
     new Thread(RandomWordGenerator::initializeNewRandomWords).start();
@@ -71,7 +82,7 @@ public class RandomWordGenerator {
 
   private static BoundRequestBuilder dataMuseWordsRequest() {
 
-    return Dsl.asyncHttpClient().prepareGet(BASE_URL)
+    return Dsl.asyncHttpClient().prepareGet(DATAMUSE_API_URL)
         .addQueryParam("topics", Topics.getRandomTopic())
         .addQueryParam("max", MAX_RESULTS);
   }
