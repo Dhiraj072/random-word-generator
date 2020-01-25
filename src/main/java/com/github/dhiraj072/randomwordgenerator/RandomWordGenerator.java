@@ -33,6 +33,11 @@ public class RandomWordGenerator {
         initializeNewRandomWords();
   }
 
+  /**
+   * Makes a HTTP request to {@link #DATAMUSE_API_URL} with a random topic
+   * from{@link Topics} to get a list of words, and updates {@link #randomWords}
+   * with the result
+   */
   private static void initializeNewRandomWords() {
 
     LOGGER.debug("Initializing with new random word");
@@ -60,7 +65,7 @@ public class RandomWordGenerator {
   /**
    * Get a random word. This has the side-effect of calling the
    * {@link #initializeNewRandomWords()} to get the next set of
-   * random words
+   * random words from DataMuse API, see {@link #DATAMUSE_API_URL}
    * @return a random word
    */
   public static String getRandomWord() {

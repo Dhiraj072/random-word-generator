@@ -12,7 +12,7 @@ import java.util.List;
  *  "tags":["syn","n","prop"]
  * }
  */
-public class DataMuseWord {
+class DataMuseWord {
 
   private String word;
   private int score;
