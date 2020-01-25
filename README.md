@@ -3,6 +3,19 @@
 A java library to generate random words.
 
 ## Usage
+Import using Maven
+```xml
+<dependency>
+  <groupId>com.github.dhiraj072</groupId>
+  <artifactId>random-word-generator</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+or using Gradle
+```gradlew
+compile 'com.github.dhiraj072:random-word-generator:1.0.0'
+```
+And use in your code as
 ```java
 // Import the class
 import com.github.dhiraj072.randomwordgenerator.RandomWordGenerator;
@@ -16,10 +29,6 @@ String randomWord = RandomWordGenerator.getRandomWord();
 -   [Gradle](https://gradle.org/) - Build tool
 -   [DataMuse API](https://www.datamuse.com/api/) - For getting list of words
 -   [JUnit](https://junit.org/) - Testing Framework
-
-## Authors
-
--   [Dhiraj](https://github.com/dhiraj072)
 
 ## License
 
