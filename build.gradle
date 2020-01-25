@@ -24,7 +24,7 @@ apply plugin: 'signing'
 apply plugin: 'java-library'
 
 group = 'com.github.dhiraj072'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = 1.8
 ext.artifactId = 'random-word-generator'
 ext.timestamp = new Date().format("yyyyMMdd'_'HHmmss", TimeZone.default)
@@ -102,7 +102,7 @@ check.dependsOn jacocoTestReport
 
 dependencies {
 	compile 'org.asynchttpclient:async-http-client:2.2.0'
-	compile 'com.fasterxml.jackson.core:jackson-databind:2.4.+'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.4.6'
 	testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
 	testCompile 'com.github.stefanbirkner:system-rules:1.17.2'
 	testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
@@ -140,9 +140,19 @@ publishing {
 				password = ossrhPassword
 			}
 		}
+		maven {
+			name 'mavenRelease'
+			url 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
+			credentials {
+				username = ossrhUsername
+				password = ossrhPassword
+			}
+		}
 	}
 	publications {
 		randomWordGenerator(MavenPublication) {
+			artifact(javadocJar)
+			artifact(sourcesJar)
 			groupId = "${group}"
 			artifactId = "${artifactId}"
 			version = "${version}"
