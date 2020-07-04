@@ -1,4 +1,4 @@
-package com.github.dhiraj072.randomwordgenerator;
+package com.github.dhiraj072.randomwordgenerator.datamuse;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,13 +12,13 @@ import java.util.List;
  *  "tags":["syn","n","prop"]
  * }
  */
-class DataMuseWord {
+public class DataMuseWord {
 
   private String word;
   private int score;
   private List<String> tags;
 
-  public DataMuseWord() {};
+  public DataMuseWord() {}
 
   public DataMuseWord(String word) {
 

@@ -2,6 +2,7 @@ package com.github.dhiraj072.randomwordgenerator;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.dhiraj072.randomwordgenerator.datamuse.DataMuseWord;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +27,7 @@ public class RandomWordGenerator {
   private static final String DATAMUSE_API_URL = "https://api.datamuse.com/words";
   private static final String MAX_RESULTS = "1000";
   private static List<DataMuseWord> randomWords;
-  private static final ObjectMapper MAPPER = new ObjectMapper();;
+  private static final ObjectMapper MAPPER = new ObjectMapper();
 
   static {
 
@@ -57,7 +58,7 @@ public class RandomWordGenerator {
     } catch (ExecutionException | InterruptedException | IOException e) {
 
       LOGGER.warn("Error initializing, setting random word from local word list");
-      LOGGER.trace("Exception initializing {}", e);
+      LOGGER.trace("Exception initializing: ", e);
       setRandomWordLocally();
     }
   }
