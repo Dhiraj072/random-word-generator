@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-class Topics {
+public class Topics {
 
   private static final List<String> topics = Arrays
       .asList("A Christmas Carol", "A Song of Ice and Fire", "Abkhazia",
@@ -396,7 +396,7 @@ class Topics {
   // No instantiation, only static methods should be called
   private Topics() { }
 
-  static String getRandomTopic() {
+  public static String getRandomTopic() {
 
     Random random = new Random();
     return topics.get(random.nextInt(topics.size()));
