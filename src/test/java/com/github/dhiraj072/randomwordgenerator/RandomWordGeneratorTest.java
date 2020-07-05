@@ -42,12 +42,24 @@ class RandomWordGeneratorTest {
     }
 
     @Test
-    void testIOExceptionFromDataMuseIsHandledCorrectly() {
+    void testIOExceptionFromDataMuseIsHandledCorrectly() throws ExecutionException, InterruptedException {
 
         BoundRequestBuilder request = Mockito.mock(BoundRequestBuilder.class);
-        ListenableFuture<Response> executionFailureResponse = new CompletedFailure<>(new IOException());
+        ListenableFuture<Response> executionFailureResponse = Mockito.mock(ListenableFuture.class);
         Mockito.when(request.execute()).thenReturn(executionFailureResponse);
+        Mockito.when(executionFailureResponse.get()).thenThrow(IOException.class);
         WordsRequest requestToThrowExecutionFailure = new BadDataMuseRequest(request);
         assertThrows(DataMuseException.class, () -> RandomWordGenerator.getRandomWord(requestToThrowExecutionFailure));
+    }
+
+    @Test
+    void testInterruptedExceptionFromDataMuseIsHandledCorrectly() throws ExecutionException, InterruptedException {
+
+        BoundRequestBuilder request = Mockito.mock(BoundRequestBuilder.class);
+        ListenableFuture<Response> executionFailureResponse = Mockito.mock(ListenableFuture.class);
+        Mockito.when(request.execute()).thenReturn(executionFailureResponse);
+        Mockito.when(executionFailureResponse.get()).thenThrow(InterruptedException.class);
+        WordsRequest requestToThrowExecutionFailure = new BadDataMuseRequest(request);
+        assertThrows(IllegalThreadStateException.class, () -> RandomWordGenerator.getRandomWord(requestToThrowExecutionFailure));
     }
 }

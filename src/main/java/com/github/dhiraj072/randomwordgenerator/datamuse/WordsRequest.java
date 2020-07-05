@@ -5,7 +5,7 @@ import org.asynchttpclient.BoundRequestBuilder;
 
 /**
  * Represents a request that can be passed to a {@link RandomWordGenerator} to specify various
- * constraints to get the words from a REST API. Full independence is given to the implementation on
+ * constraints to get the words from a  REST API. Full independence is given to the implementation on
  * what those constraints are. However, this enforces all implementations use {@link BoundRequestBuilder}
  * as the builder for contained HTTP request so that downstream execution is consistent.
  */
