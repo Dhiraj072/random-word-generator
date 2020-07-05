@@ -1,6 +1,7 @@
 package com.github.dhiraj072.randomwordgenerator;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.github.dhiraj072.randomwordgenerator.datamuse.DataMuseRequest;
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Integration tests with <a href="https://api.datamuse.com/words">DataMuse API endpoint</a>
  */
-class RandomWordGeneratorTest {
+class RandomWordGeneratorIntegrationTest {
 
   @Test
   void testGetsRandomWordCorrectly() {
@@ -34,5 +35,12 @@ class RandomWordGeneratorTest {
         "vehicle","truck","sedan","van","suv","vehicles","driver","cruiser","cab","tire",
         "motor","limo","passenger","taxi","bus","wheel");
     assertTrue(expectedWords.contains(actualWord));
+  }
+
+  @Test
+  void testEmptyResponseFromDataMuseIsHandledCorrectly() {
+
+    assertThrows(DataMuseException.class, () ->
+        RandomWordGenerator.getRandomWord(new DataMuseRequest()));
   }
 }

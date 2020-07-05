@@ -10,7 +10,7 @@ import org.asynchttpclient.Dsl;
  *
  * NOTE: Support for quite a lot of the constraints in DataMuse API is yet to be added.
  */
-public class DataMuseRequest {
+public class DataMuseRequest implements WordsRequest {
 
     private static final String DATAMUSE_API_URL = "https://api.datamuse.com/words";
     private BoundRequestBuilder request;
@@ -57,6 +57,7 @@ public class DataMuseRequest {
         return this;
     }
 
+    @Override
     public BoundRequestBuilder build() {
 
         return request;

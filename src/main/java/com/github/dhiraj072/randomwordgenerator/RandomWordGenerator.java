@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.dhiraj072.randomwordgenerator.datamuse.DataMuseRequest;
 import com.github.dhiraj072.randomwordgenerator.datamuse.DataMuseWord;
+import com.github.dhiraj072.randomwordgenerator.datamuse.WordsRequest;
 import com.github.dhiraj072.randomwordgenerator.exceptions.DataMuseException;
 import java.io.IOException;
 import java.util.Collections;
@@ -55,7 +56,7 @@ public class RandomWordGenerator {
     }
   }
 
-  private static List<DataMuseWord> getDataMuseWords(DataMuseRequest request) throws DataMuseException {
+  private static List<DataMuseWord> getDataMuseWords(WordsRequest request) throws DataMuseException {
 
     try {
 
@@ -91,7 +92,7 @@ public class RandomWordGenerator {
   }
 
   /**
-   * Get a random word that is skewed towards the constraints provided in {@link DataMuseRequest} param.
+   * Get a random word that is skewed towards the constraints provided in {@link WordsRequest} param.
    *
    * For example, you can get the random word skewed toward certain topics you want (e.g. Car, Human) by
    * setting {@link DataMuseRequest#topics(String...)} in your request parameter.
@@ -99,7 +100,7 @@ public class RandomWordGenerator {
    * @param request DataMuse request with custom params specified as per the random word result required
    * @return a random word from the result of the incoming request
    */
-  public static String getRandomWord(DataMuseRequest request) throws DataMuseException {
+  public static String getRandomWord(WordsRequest request) throws DataMuseException {
 
     List<DataMuseWord> wordsReturned = getDataMuseWords(request);
     return wordsReturned.get(random.nextInt(wordsReturned.size())).getWord();
