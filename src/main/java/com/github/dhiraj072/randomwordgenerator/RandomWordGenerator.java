@@ -31,6 +31,9 @@ public class RandomWordGenerator {
         initializeNewRandomWords();
   }
 
+  // No instantiation allowed
+  private RandomWordGenerator() {};
+
   /**
    * Makes a HTTP request to {@link DataMuseRequest#DATAMUSE_API_URL} with a random topic
    * from {@link Topics} to get a list of words, and updates {@link #randomWords}

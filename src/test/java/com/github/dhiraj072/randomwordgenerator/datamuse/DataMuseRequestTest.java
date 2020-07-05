@@ -12,6 +12,6 @@ class DataMuseRequestTest {
 
         BoundRequestBuilder request =
             new DataMuseRequest().topics("topic1", "topic2").build();
-        assertEquals(request.build().getQueryParams().get(0).getValue(), "topic1%2Ctopic2%2C");
+        assertEquals("topic1%2Ctopic2%2C", request.build().getQueryParams().get(0).getValue());
     }
 }

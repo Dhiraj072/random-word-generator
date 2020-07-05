@@ -24,7 +24,7 @@ apply plugin: 'signing'
 apply plugin: 'java-library'
 
 group = 'com.github.dhiraj072'
-version = '1.1.0'
+version = '1.1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 ext.artifactId = 'random-word-generator'
 ext.timestamp = new Date().format("yyyyMMdd'_'HHmmss", TimeZone.default)
@@ -136,16 +136,16 @@ publishing {
 			name 'mavenSnapshot'
 			url 'https://oss.sonatype.org/content/repositories/snapshots/'
 			credentials {
-				username = ossrhUsername
-				password = ossrhPassword
+				username = project.hasProperty('ossrhUsername') ? ossrhUsername : ""
+				password =  project.hasProperty('ossrhPassword') ? ossrhPassword : ""
 			}
 		}
 		maven {
 			name 'mavenRelease'
 			url 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
 			credentials {
-				username = ossrhUsername
-				password = ossrhPassword
+				username = project.hasProperty('ossrhUsername') ? ossrhUsername : ""
+				password =  project.hasProperty('ossrhPassword') ? ossrhPassword : ""
 			}
 		}
 	}
