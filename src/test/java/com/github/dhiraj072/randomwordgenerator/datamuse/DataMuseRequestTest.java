@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.asynchttpclient.BoundRequestBuilder;
 import org.junit.jupiter.api.Test;
 
-class DataMuseRequestBuilderTest {
+class DataMuseRequestTest {
 
     @Test
     public void testSetsTopicsCorrectly() {
 
         BoundRequestBuilder request =
-            new DataMuseRequestBuilder().topics("topic1", "topic2").build();
+            new DataMuseRequest().topics("topic1", "topic2").build();
         assertEquals(request.build().getQueryParams().get(0).getValue(), "topic1%2Ctopic2%2C");
     }
 }

@@ -3,7 +3,7 @@ package com.github.dhiraj072.randomwordgenerator;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.github.dhiraj072.randomwordgenerator.datamuse.DataMuseRequestBuilder;
+import com.github.dhiraj072.randomwordgenerator.datamuse.DataMuseRequest;
 import com.github.dhiraj072.randomwordgenerator.exceptions.DataMuseException;
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +24,7 @@ class RandomWordGeneratorTest {
   @Test
   void testGetsRandomWordByTopicCorrectly() throws DataMuseException {
 
-    DataMuseRequestBuilder request = new DataMuseRequestBuilder().topics("Car").maxResults("1");
+    DataMuseRequest request = new DataMuseRequest().topics("Car").maxResults("1");
     String actualWord = RandomWordGenerator.getRandomWord(request);
     // Expected list of words we should get as per a manual request for https://api.datamuse.com/words?topics=Car
     // executed on DataMuse API on 4 July 2020. There is a little chance 'might' change in future which will

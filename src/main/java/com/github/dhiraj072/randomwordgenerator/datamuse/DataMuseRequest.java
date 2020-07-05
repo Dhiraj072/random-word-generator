@@ -10,12 +10,12 @@ import org.asynchttpclient.Dsl;
  *
  * NOTE: Support for quite a lot of the constraints in DataMuse API is yet to be added.
  */
-public class DataMuseRequestBuilder {
+public class DataMuseRequest {
 
     private static final String DATAMUSE_API_URL = "https://api.datamuse.com/words";
     private BoundRequestBuilder request;
 
-    public DataMuseRequestBuilder() {
+    public DataMuseRequest() {
 
         request = Dsl.asyncHttpClient().prepareGet(DATAMUSE_API_URL);
     }
@@ -30,7 +30,7 @@ public class DataMuseRequestBuilder {
      * @param topics string arguments for your topics
      * @return request with topics param set
      */
-    public DataMuseRequestBuilder topics(String... topics) {
+    public DataMuseRequest topics(String... topics) {
 
         StringBuilder topicsParam = new StringBuilder();
         int count = 0;
@@ -51,7 +51,7 @@ public class DataMuseRequestBuilder {
      *
      * @return request with max param set
      */
-    public DataMuseRequestBuilder maxResults(String maxResults) {
+    public DataMuseRequest maxResults(String maxResults) {
 
         request.addQueryParam("max", maxResults);
         return this;

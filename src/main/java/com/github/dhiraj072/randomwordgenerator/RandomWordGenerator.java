@@ -2,7 +2,7 @@ package com.github.dhiraj072.randomwordgenerator;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.dhiraj072.randomwordgenerator.datamuse.DataMuseRequestBuilder;
+import com.github.dhiraj072.randomwordgenerator.datamuse.DataMuseRequest;
 import com.github.dhiraj072.randomwordgenerator.datamuse.DataMuseWord;
 import com.github.dhiraj072.randomwordgenerator.exceptions.DataMuseException;
 import java.io.IOException;
@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Get random words using <a href="https://www.datamuse.com/api/">DataMuse API</a>
- * or locally from {@link Topics}.
  */
 public class RandomWordGenerator {
 
@@ -33,8 +32,8 @@ public class RandomWordGenerator {
   }
 
   /**
-   * Makes a HTTP request to {@link DataMuseRequestBuilder#DATAMUSE_API_URL} with a random topic
-   * from{@link Topics} to get a list of words, and updates {@link #randomWords}
+   * Makes a HTTP request to {@link DataMuseRequest#DATAMUSE_API_URL} with a random topic
+   * from {@link Topics} to get a list of words, and updates {@link #randomWords}
    * with the result
    */
   private static void initializeNewRandomWords() {
@@ -42,7 +41,7 @@ public class RandomWordGenerator {
     LOGGER.debug("Initializing with new random word");
     try {
 
-      DataMuseRequestBuilder standardRequest = new DataMuseRequestBuilder()
+      DataMuseRequest standardRequest = new DataMuseRequest()
           .topics(Topics.getRandomTopic())
           .maxResults("1000");
       setRandomWords(getDataMuseWords(standardRequest));
@@ -53,7 +52,7 @@ public class RandomWordGenerator {
     }
   }
 
-  private static List<DataMuseWord> getDataMuseWords(DataMuseRequestBuilder request) throws DataMuseException {
+  private static List<DataMuseWord> getDataMuseWords(DataMuseRequest request) throws DataMuseException {
 
     try {
 
@@ -79,7 +78,7 @@ public class RandomWordGenerator {
   /**
    * Get a random word. This has the side-effect of calling the
    * {@link #initializeNewRandomWords()} to get the next set of
-   * random words from DataMuse API, see {@link DataMuseRequestBuilder#DATAMUSE_API_URL}
+   * random words from DataMuse API, see {@link DataMuseRequest#DATAMUSE_API_URL}
    * @return a random word
    */
   public static String getRandomWord() {
@@ -89,15 +88,15 @@ public class RandomWordGenerator {
   }
 
   /**
-   * Get a random word that is skewed towards the constraints provided in{@link DataMuseRequestBuilder} param.
+   * Get a random word that is skewed towards the constraints provided in {@link DataMuseRequest} param.
    *
-   * For example, you can get the random word skewed toward a certain topics you want by
-   * setting {@link DataMuseRequestBuilder#topics(String...)} in your request parameter.
+   * For example, you can get the random word skewed toward certain topics you want (e.g. Car, Human) by
+   * setting {@link DataMuseRequest#topics(String...)} in your request parameter.
    *
    * @param request DataMuse request with custom params specified as per the random word result required
    * @return a random word from the result of the incoming request
    */
-  public static String getRandomWord(DataMuseRequestBuilder request) throws DataMuseException {
+  public static String getRandomWord(DataMuseRequest request) throws DataMuseException {
 
     List<DataMuseWord> wordsReturned = getDataMuseWords(request);
     return wordsReturned.get(random.nextInt(wordsReturned.size())).getWord();
