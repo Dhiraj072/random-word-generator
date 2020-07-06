@@ -55,7 +55,7 @@ public class DataMuseRequest implements WordsRequest {
      *
      * @return request with max param set
      */
-    private DataMuseRequest maxResults(int maxResults) {
+    protected DataMuseRequest maxResults(int maxResults) {
 
         request.addQueryParam("max", Integer.toString(Math.min(maxResults, 1000)));
         return this;
