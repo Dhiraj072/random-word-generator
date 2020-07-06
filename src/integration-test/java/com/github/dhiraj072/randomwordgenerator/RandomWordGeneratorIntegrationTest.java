@@ -25,7 +25,7 @@ class RandomWordGeneratorIntegrationTest {
   @Test
   void testGetsRandomWordByTopicCorrectly() throws DataMuseException {
 
-    DataMuseRequest request = new DataMuseRequest().topics("Car").maxResults("1");
+    DataMuseRequest request = new DataMuseRequest().topics("Car");
     String actualWord = RandomWordGenerator.getRandomWord(request);
     // Expected list of words we should get as per a manual request for https://api.datamuse.com/words?topics=Car
     // executed on DataMuse API on 4 July 2020. There is a little chance 'might' change in future which will

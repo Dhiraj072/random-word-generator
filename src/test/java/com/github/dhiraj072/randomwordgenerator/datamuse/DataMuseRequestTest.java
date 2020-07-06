@@ -12,7 +12,7 @@ class DataMuseRequestTest {
 
         BoundRequestBuilder request =
             new DataMuseRequest().topics("topic1", "topic2").build();
-        assertEquals("topic1%2Ctopic2%2C", request.build().getQueryParams().get(0).getValue());
+        assertEquals("topic1%2Ctopic2%2C", request.build().getQueryParams().get(1).getValue());
     }
 
     @Test
@@ -21,6 +21,6 @@ class DataMuseRequestTest {
         BoundRequestBuilder request =
             new DataMuseRequest().topics("topic1", "topic2", "topic3", "topic4", "topic5", "topic6").build();
         assertEquals("topic1%2Ctopic2%2Ctopic3%2Ctopic4%2Ctopic5",
-            request.build().getQueryParams().get(0).getValue());
+            request.build().getQueryParams().get(1).getValue());
     }
 }

@@ -1,5 +1,6 @@
 package com.github.dhiraj072.randomwordgenerator.datamuse;
 
+import com.github.dhiraj072.randomwordgenerator.RandomWordGenerator;
 import org.asynchttpclient.BoundRequestBuilder;
 import org.asynchttpclient.Dsl;
 
@@ -18,6 +19,7 @@ public class DataMuseRequest implements WordsRequest {
     public DataMuseRequest() {
 
         request = Dsl.asyncHttpClient().prepareGet(DATAMUSE_API_URL);
+        this.maxResults(500); // default to 500 for all our requests
     }
 
     /**
@@ -48,12 +50,14 @@ public class DataMuseRequest implements WordsRequest {
 
     /**
      * Maximum number of results to return, not to exceed 1000. (default: 100)
+     * Private because we don't want this to be visible to the users of
+     * {@link RandomWordGenerator#getDataMuseWords(WordsRequest)}, at least for now.
      *
      * @return request with max param set
      */
-    public DataMuseRequest maxResults(String maxResults) {
+    private DataMuseRequest maxResults(int maxResults) {
 
-        request.addQueryParam("max", maxResults);
+        request.addQueryParam("max", Integer.toString(Math.min(maxResults, 1000)));
         return this;
     }
 

@@ -46,8 +46,7 @@ public class RandomWordGenerator {
     try {
 
       DataMuseRequest standardRequest = new DataMuseRequest()
-          .topics(Topics.getRandomTopic())
-          .maxResults("1000");
+          .topics(Topics.getRandomTopic());
       setRandomWords(getDataMuseWords(standardRequest));
     } catch (DataMuseException e) {
 
