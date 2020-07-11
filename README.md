@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/Dhiraj072/random-word-generator.svg?branch=master)](https://travis-ci.com/Dhiraj072/random-word-generator)
 [![Coverage Status](https://coveralls.io/repos/github/Dhiraj072/random-word-generator/badge.svg?branch=master)](https://coveralls.io/github/Dhiraj072/random-word-generator?branch=master)
 
-A java library to generate random words.
+A java library to generate random words. This utilizes the [DataMuse API](https://www.datamuse.com/api/) as its word-finding engine.
 
 ## Usage
 Import from Maven Central
