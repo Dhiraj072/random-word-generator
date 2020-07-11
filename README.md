@@ -13,12 +13,12 @@ Using Maven
 <dependency>
   <groupId>com.github.dhiraj072</groupId>
   <artifactId>random-word-generator</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 Using Gradle
 ```gradlew
-compile 'com.github.dhiraj072:random-word-generator:1.0.0'
+compile 'com.github.dhiraj072:random-word-generator:1.1.0'
 ```
 Get a random word
 ```java
