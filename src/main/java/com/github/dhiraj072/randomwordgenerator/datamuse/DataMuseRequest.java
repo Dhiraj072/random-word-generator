@@ -49,6 +49,31 @@ public class DataMuseRequest implements WordsRequest {
     }
 
     /**
+     * Means like constraint: require that the results have a meaning related to the provided string parameter,
+     * @param wordsMeanLike any word or sequence of words.
+     * @return request with ml param set as param wordsMeanLike
+     */
+    public DataMuseRequest meansLike(String wordsMeanLike) {
+
+        request.addQueryParam("ml", wordsMeanLike);
+        return this;
+    }
+
+    /**
+     * Sounds like constraint: require that the results are pronounced similarly to provided wordsSoundLike parameter.
+     * (If the string of characters doesn't have a known pronunciation, the system will make its best guess using
+     * a text-to-phonemes algorithm.)
+     *
+     * @param wordsSoundLike any sequence of characters
+     * @return request with sl param set as param wordsSoundLike
+     */
+    public DataMuseRequest soundsLike(String wordsSoundLike) {
+
+        request.addQueryParam("sl", wordsSoundLike);
+        return this;
+    }
+
+    /**
      * Maximum number of results to return, not to exceed 1000. (default: 100)
      * Private because we don't want this to be visible to the users of
      * {@link RandomWordGenerator#getDataMuseWords(WordsRequest)}, at least for now.
